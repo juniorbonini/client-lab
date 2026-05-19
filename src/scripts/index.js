@@ -156,10 +156,7 @@ const renderClients = (clients) => {
     email.textContent = client.email;
     deleteBtn.textContent = "Excluir";
 
-    deleteBtn.addEventListener(
-      "click",
-      () => {} /*função deleteClient(id client) */,
-    );
+    deleteBtn.addEventListener("click", () => deleteClient(client._id));
 
     item.appendChild(info);
     info.appendChild(name);
@@ -223,3 +220,15 @@ function createClient() {
       : "Cadastrar";
   };
 }
+
+const deleteClient = (id) => {
+  enqueue(() => {
+    fetch(`${API_URL}/${id}`, { method: "DELETE" })
+      .then((res) => {
+        if (!res.ok) throw new Error("Erro ao remover cliente");
+        return res.json();
+      })
+      .then(() => listClients())
+      .catch(() => showErrorMessage("Não foi possível remover o cliente"));
+  });
+};
