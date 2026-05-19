@@ -107,3 +107,15 @@ const processQueue = () => {
     processQueue();
   });
 };
+
+const showState = (state) => {
+  getElement("stateLoading").hidden = state !== "loading";
+  getElement("stateEmpty").hidden = state !== "empty";
+  getElement("stateError").hidden = state !== "error";
+  getElement("list").hidden = state !== "list";
+};
+
+const showErrorMessage = (message) => {
+  getElement("errorMessage").textContent = message;
+  showState("error")
+}
