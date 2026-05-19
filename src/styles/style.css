@@ -3,3 +3,83 @@ html {
   box-sizing: border-box;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --clr-bg: #0e0b18;
+  --clr-surface: #13101f;
+  --clr-surface-hi: #1a1630;
+  --clr-border: #2a2245;
+  --clr-border-hi: #3d3460;
+
+  --clr-purple: #9b6dff;
+  --clr-purple-dim: #6b44cc;
+  --clr-purple-glow: rgba(155, 109, 255, 0.16);
+  --clr-purple-glow2: rgba(155, 109, 255, 0.06);
+
+  --clr-gold: #e8c56a;
+  --clr-gold-dim: #b8962a;
+  --clr-gold-glow: rgba(232, 197, 106, 0.14);
+
+  --clr-txt-primary: #ede8ff;
+  --clr-txt-secondary: #8a82a8;
+  --clr-txt-muted: #4a4268;
+
+  --clr-success: #5eead4;
+  --clr-success-glow: rgba(94, 234, 212, 0.12);
+
+  --clr-danger: #ff6b8a;
+  --clr-danger-glow: rgba(255, 107, 138, 0.12);
+
+  --sz-1: 0.4rem;
+  --sz-2: 0.8rem;
+  --sz-3: 1.2rem;
+  --sz-4: 1.6rem;
+  --sz-5: 2rem;
+  --sz-6: 2.4rem;
+  --sz-7: 2.8rem;
+  --sz-8: 3.2rem;
+  --sz-10: 4rem;
+  --sz-12: 4.8rem;
+  --sz-14: 5.6rem;
+  --sz-16: 6.4rem;
+  --sz-20: 8rem;
+
+  --font-display: "Crimson Pro", serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --fz-xs: 1.1rem;
+  --fz-sm: 1.3rem;
+  --fz-base: 1.6rem;
+  --fz-md: 1.8rem;
+  --fz-lg: 2.2rem;
+  --fz-xl: 3rem;
+  --fz-2xl: 4rem;
+  --fz-3xl: 5.2rem;
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-semibold: 600;
+
+  --lh-tight: 1.1;
+  --lh-normal: 1.6;
+  --lh-loose: 1.8;
+
+  --radius-sm: 0.6rem;
+  --radius-md: 1.2rem;
+  --radius-lg: 2rem;
+  --radius-pill: 99rem;
+
+  --shadow-card: 0 2rem 5rem rgba(0, 0, 0, 0.5);
+  --shadow-btn: 0 0.4rem 2rem rgba(155, 109, 255, 0.35);
+
+  --transition-fast: 150ms ease;
+  --transition-base: 280ms ease;
+  --transition-slow: 440ms ease;
+}
