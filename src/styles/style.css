@@ -296,3 +296,17 @@ body {
 .input.Isinvalid {
   border-color: var(--clr-danger);
 }
+
+.fieldFeedback {
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+  min-height: 1.5rem;
+}
+
+.fieldFeedback.success {
+  color: var(--clr-success);
+}
+
+.filedFeedback.error {
+  color: var(--clr-danger);
+}
