@@ -34,6 +34,41 @@
               Preencha os dados abaixo para cadastrar
             </p>
           </header>
+
+          <form class="formContainer" id="form" novalidate autocomplete="off">
+            <div class="fieldGroup" id="groupName">
+              <label for="inputName" class="fieldLabel">Nome</label>
+              <input
+                type="text"
+                id="inputName"
+                class="input"
+                placeholder="Seu nome..."
+                minlength="4"
+                autocomplete="off"
+              />
+              <span
+                class="fieldFeedback"
+                id="feedbackName"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <div class="fieldGroup" id="groupEmail">
+              <label for="inputEmail" class="fieldLabel">E-mail</label>
+              <input
+                type="email"
+                class="input"
+                placeholder="email@example.com"
+                autocomplete="off"
+                autocapitalize="off"
+              />
+              <span
+                class="fieldFeedback"
+                id="feedbackEmail"
+                aria-live="polite"
+              ></span>
+            </div>
+          </form>
         </section>
       </main>
     </div>
