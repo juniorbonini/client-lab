@@ -83,3 +83,13 @@ html {
   --transition-base: 280ms ease;
   --transition-slow: 440ms ease;
 }
+
+body {
+  font-family: var(--font-display);
+  font-size: var(--fz-base);
+  line-height: var(--lh-normal);
+  color: var(--clr-txt-primary);
+  background-color: var(--clr-bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
