@@ -89,6 +89,24 @@
               </button>
             </div>
           </header>
+
+          <div class="stateContainer" id="stateLoading" hidden>
+            <span class="stateSpinner" aria-hidden="true">✦</span>
+            <p class="stateText">Carregando clientes...</p>
+          </div>
+          <div class="stateContainer" id="stateEmpty" hidden>
+            <span class="stateIcon" aria-hidden="true">◎</span>
+            <p class="stateText">Nenhum cliente cadastrado ainda.</p>
+          </div>
+
+          <div class="stateCotnainer" id="stateError" hidden>
+            <span class="stateIcon" aria-hidden="true">
+              <span class="stateIcon" aria-hidden="true">x</span>
+              <p class="stateText" id="stateErrorMessage">
+                Erro ao carregar clientes.
+              </p>
+            </span>
+          </div>
         </section>
       </main>
     </div>
