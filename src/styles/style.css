@@ -508,3 +508,19 @@ body {
   background: var(--clr-danger-glow);
   color: var(--clr-danger);
 }
+
+.footerContainer {
+  text-align: center;
+  font-size: var(--fz-xs);
+  font-family: var(--font-mono);
+  color: var(--clr-txt-muted);
+  padding: var(--sz-6) 0;
+  border-top: 1px solid var(--clr-border);
+}
+
+.footerContianer em {
+  font-style: italic;
+  color: var(--clr-gold-dim);
+  font-family: var(--font-display);
+  font-size: var(--fz-sm);
+}
