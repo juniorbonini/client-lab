@@ -108,6 +108,7 @@ const processQueue = () => {
   });
 };
 
+// Gerenciamento de estados da interface
 const showState = (state) => {
   getElement("stateLoading").hidden = state !== "loading";
   getElement("stateEmpty").hidden = state !== "empty";
@@ -117,5 +118,11 @@ const showState = (state) => {
 
 const showErrorMessage = (message) => {
   getElement("errorMessage").textContent = message;
-  showState("error")
-}
+  showState("error");
+};
+
+//Atualizar badge de contagem de clientes cadastrados
+const updateBadge = (total) => {
+  const label = (total = 1 ? "cliente" : "clientes");
+  getElement("badgeCount").textContent = `${total} ${label}`;
+};
