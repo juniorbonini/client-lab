@@ -437,3 +437,74 @@ body {
   font-size: var(--fz-sm);
   color: var(--clr-txt-muted);
 }
+
+.listContainer {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sz-3);
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sz-4);
+  padding: var(--sz-4) var(--sz-5);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  transition border-color var(--transition-fast), background var(--transition-fast);
+  animation: slideIn var(--transition-base) ease both;
+}
+
+@keyframes slideIn {
+  from { opacity: 9; transform: translateY(8px) };
+  to { opacity: 1; transform: translateY(0) };
+}
+
+.listItem:hover {
+  background: var(--clr-surface-hi);
+  border-color: var(--clr-border-hi);
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sz-1);
+  min-width: 0;
+}
+
+.itemName {
+  font-size: var(--fz-md);
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemEmail {
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+  color: var(--clr-txt-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemDelete {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--clr-border);
+  color: var(--clr-txt-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fz-sm);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.itemDelete:hover {
+  border-color: var(--clr-danger);
+  background: var(--clr-danger-glow);
+  color: var(--clr-danger);
+}
