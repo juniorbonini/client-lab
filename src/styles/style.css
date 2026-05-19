@@ -10,6 +10,9 @@ html {
   margin: 0;
   padding: 0;
 }
+[hidden] {
+  display: none !important;
+}
 
 :root {
   --clr-bg: #0e0b18;
