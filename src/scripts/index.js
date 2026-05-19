@@ -67,3 +67,43 @@ const validateForm = () => {
 
   return valid;
 };
+
+// Debounce
+/*
+  Retorna uma versão "segurada" de uma função.
+  Só executa depois que o usuário parar de acionar
+  por X milissegundos. Evita chamadas repetidas
+  enquanto o usuário ainda está digitando.
+*/
+
+const debounce = (fn, delay) => {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
+};
+
+// Fila da requisições
+/*
+  Enfileira uma função de requisição e processa
+  uma de cada vez. Enquanto uma está em andamento,
+  as próximas aguardam na fila.
+*/
+
+const enqueue = (requestFn) => {
+  requestQueue.push(requestFn);
+
+  processQueue();
+};
+
+const processQueue = () => {
+  if (isProcessing || requestQueue.length === 0) return;
+  isProcessing = true;
+  const next = requestQueue.shift();
+
+  next().then(() => {
+    isProcessing = false;
+    processQueue();
+  });
+};
