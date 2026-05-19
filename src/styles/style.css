@@ -252,3 +252,47 @@ body {
   pointer-events: none;
 }
 
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sz-1);
+}
+
+.fieldLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+  color: var(--clr-txt-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.input {
+  height: var(--sz-12);
+  background: var(--clr-surface-hi);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--fz-sm);
+  color: var(--clr-txt-primary);
+  padding: 0 var(--sz-4);
+  outline: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.input::placeholder {
+  color: var(--clr-txt-muted);
+}
+
+.input:focus {
+  border-color: var(--clr-purple);
+  box-shadow: 0 0 0 3px var(--clr-purple-glow);
+}
+
+.input.isValid {
+  border-color: var(--clr-success);
+}
+.input.Isinvalid {
+  border-color: var(--clr-danger);
+}
