@@ -136,3 +136,54 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sz-6) 0;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.brandContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--sz-3);
+}
+
+.brandSymbol {
+  font-size: var(--fz-lg);
+  color: var(--clr-gold);
+  text-shadow: 0 0 1.5rem var(--clr-gold-glow);
+  animation: pulse 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+}
+
+.brandTitle {
+  font-size: var(--fz-xl);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.5em;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+  color: var(--clr-gold);
+  background: var(--clr-gold-glow);
+  border: 1px solid var(--clr-gold-dim);
+  padding: var(--sz-1) var(--sz-3);
+  letter-spacing: 0.8em;
+  border-radius: var(--radius-pill);
+}
