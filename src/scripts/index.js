@@ -190,9 +190,9 @@ function createClient() {
   const client = {
     name: getValue("inputName"),
     email: getValue("inputEmail"),
-  }
+  };
 
-  // setSubmitState...
+  setSubmitState(true);
 
   enqueue(() => {
     fetch(API_URL, {
@@ -212,6 +212,14 @@ function createClient() {
         listClients();
       })
       .catch(() => showErrorMessage("Não foi possível criar cliente"))
-      .finally(() => {} /* setSubmitState */);
+      .finally(() => setSubmitState(false));
   });
+
+  const setSubmitState = (isSubmiting) => {
+    const btn = getElement("submitBtn");
+    btn.disabled = isSubmiting;
+    btn.querySelector(".btnText").textContent = isSubmiting
+      ? "Cadastrando..."
+      : "Cadastrar";
+  };
 }
