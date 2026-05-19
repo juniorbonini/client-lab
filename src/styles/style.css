@@ -397,3 +397,43 @@ body {
   border-color: var(--clr-purple);
   color: var(--clr-purple);
 }
+
+.stateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sz-3);
+  padding: var(--sz-12) var(--sz-6);
+  border: 1px solid var(--clr-border);
+  text-align: center;
+  border-radius: var(--radius-lg);
+}
+
+.stateIcon .stateSpinner {
+  font-size: var(--fz-2xl);
+  color: var(--clr-txt-muted);
+}
+
+.stateSpinner {
+  color: var(--clr-purple);
+  animation: spin 1.2s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0%,
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: rotate(180deg) scale(0.8);
+  }
+}
+
+.stateText {
+  font-family: var(--font-mono);
+  font-size: var(--fz-sm);
+  color: var(--clr-txt-muted);
+}
