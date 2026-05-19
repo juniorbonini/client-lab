@@ -1,5 +1,20 @@
+/*
+    Lógica aplicada: Debounce + Fila de Requisições
+
+    Debounce: evita chamadas repetidas em sequência rápida.
+    Fila:     garante que as requisições à API aconteçam
+              em ordem, uma de cada vez, sem condições de
+              corrida entre POST, DELETE e GET.
+
+    Fluxo de uma operação:
+    1. Usuário aciona uma ação (cadastrar ou excluir)
+    2. A operação entra na fila
+    3. A fila processa uma operação por vez
+    4. Ao terminar, a lista é atualizada automaticamente
+  */
+
 const API_URL =
-  "https://crudcrud.com/api/abbe1a4da8304f5db77b73245d0e45a7/clients";
+  "https://crudcrud.com/api/171c62f629504f2c946388a45e444e58/clients";
 
 let requestQueue = [];
 let isProcessing = false;
@@ -71,11 +86,11 @@ const validateForm = () => {
 
 // Debounce
 /*
-  Retorna uma versão "segurada" de uma função.
-  Só executa depois que o usuário parar de acionar
-  por X milissegundos. Evita chamadas repetidas
-  enquanto o usuário ainda está digitando.
-*/
+    Retorna uma versão "segurada" de uma função.
+    Só executa depois que o usuário parar de acionar
+    por X milissegundos. Evita chamadas repetidas
+    enquanto o usuário ainda está digitando.
+  */
 
 const debounce = (fn, delay) => {
   let timer;
@@ -87,10 +102,10 @@ const debounce = (fn, delay) => {
 
 // Fila da requisições
 /*
-  Enfileira uma função de requisição e processa
-  uma de cada vez. Enquanto uma está em andamento,
-  as próximas aguardam na fila.
-*/
+    Enfileira uma função de requisição e processa
+    uma de cada vez. Enquanto uma está em andamento,
+    as próximas aguardam na fila.
+  */
 
 const enqueue = (requestFn) => {
   requestQueue.push(requestFn);
@@ -118,13 +133,13 @@ const showState = (state) => {
 };
 
 const showErrorMessage = (message) => {
-  getElement("errorMessage").textContent = message;
+  getElement("stateErrorMessage").textContent = message;
   showState("error");
 };
 
 //Atualizar badge de contagem de clientes cadastrados
 const updateBadge = (total) => {
-  const label = (total = 1 ? "cliente" : "clientes");
+  const label = total === 1 ? "cliente" : "clientes";
   getElement("badgeCount").textContent = `${total} ${label}`;
 };
 
@@ -165,7 +180,7 @@ const renderClients = (clients) => {
     list.appendChild(item);
 
     showState("list");
-    updateBadge * clients.length;
+    updateBadge(clients.length);
   });
 };
 
@@ -194,7 +209,7 @@ function createClient() {
   setSubmitState(true);
 
   enqueue(() => {
-    fetch(API_URL, {
+    return fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(client),
@@ -213,21 +228,12 @@ function createClient() {
       .catch(() => showErrorMessage("Não foi possível criar cliente"))
       .finally(() => setSubmitState(false));
   });
-
-  // Gerenciar estado do botão de submit
-  const setSubmitState = (isSubmiting) => {
-    const btn = getElement("submitBtn");
-    btn.disabled = isSubmiting;
-    btn.querySelector(".btnText").textContent = isSubmiting
-      ? "Cadastrando..."
-      : "Cadastrar";
-  };
 }
 
 // Remover cliente
 const deleteClient = (id) => {
   enqueue(() => {
-    fetch(`${API_URL}/${id}`, { method: "DELETE" })
+    return fetch(`${API_URL}/${id}`, { method: "DELETE" })
       .then((res) => {
         if (!res.ok) throw new Error("Erro ao remover cliente");
         return res.json();
@@ -237,7 +243,16 @@ const deleteClient = (id) => {
   });
 };
 
-//validar campo(Name) com debounce para não validar a cada tecla digitada
+// Gerenciar estado do botão de submit
+const setSubmitState = (isSubmiting) => {
+  const btn = getElement("submitBtn");
+  btn.disabled = isSubmiting;
+  btn.querySelector(".btnText").textContent = isSubmiting
+    ? "Cadastrando..."
+    : "Cadastrar";
+};
+
+// Validar campo(Name) com debounce para não validar a cada tecla digitada
 const debounceValidateName = debounce(() => {
   const value = getValue("inputName");
   if (isEmpty(value))
@@ -250,8 +265,8 @@ const debounceValidateName = debounce(() => {
   );
 }, 400);
 
-//validar campo(E-mail) com debounce para não validar a cada tecla digitada
-const deboundeValidateEmail = debounce(() => {
+// Validar campo(E-mail) com debounce para não validar a cada tecla digitada
+const debounceValidateEmail = debounce(() => {
   const value = getValue("inputEmail");
   if (isEmpty(value))
     return setFieldState("inputEmail", "feedbackEmail", null, "");
@@ -262,3 +277,24 @@ const deboundeValidateEmail = debounce(() => {
     isValidEmail(value) ? "" : "E-mail inválido",
   );
 });
+
+// Eventos
+getElement("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  createClient();
+});
+
+getElement("clearBtn").addEventListener("click", () => {
+  clearField("inputName");
+  clearField("inputEmail");
+  setFieldState("inputName", "feedbackName", null, "");
+  setFieldState("inputEmail", "feedbackEmail", null, "");
+});
+
+getElement("refreshBtn").addEventListener("click", listClients);
+
+getElement("inputName").addEventListener("input", debounceValidateName);
+getElement("inputEmail").addEventListener("input", debounceValidateEmail);
+
+// Inicialização
+listClients();
