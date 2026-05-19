@@ -171,3 +171,15 @@ const renderClients = (clients) => {
     updateBadge * clients.length;
   });
 };
+
+function listClients() {
+  showState("loading");
+
+  fetch(API_URL)
+    .then((res) => {
+      if (!res.ok) throw new Error("Erro ao carregar clientes");
+      return res.json();
+    })
+    .then((data) => renderClients(data))
+    .catch(() => showErrorMessage("Não foi possível carregar clientes"));
+}
