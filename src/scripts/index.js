@@ -183,3 +183,35 @@ function listClients() {
     .then((data) => renderClients(data))
     .catch(() => showErrorMessage("Não foi possível carregar clientes"));
 }
+
+function createClient() {
+  if (!validateForm()) return;
+
+  const client = {
+    name: getValue("inputName"),
+    email: getValue("inputEmail"),
+  }
+
+  // setSubmitState...
+
+  enqueue(() => {
+    fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(client),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Erro ao criar cliente");
+        return res.json();
+      })
+      .then(() => {
+        clearField("inputName");
+        clearField("inputEmail");
+        setFieldState("inputName", "feedbackName", null, "");
+        setFieldState("inputEmail", "feedbackEmail", null, "");
+        listClients();
+      })
+      .catch(() => showErrorMessage("Não foi possível criar cliente"))
+      .finally(() => {} /* setSubmitState */);
+  });
+}
