@@ -3,3 +3,14 @@ const API_URL =
 
 let requestQueue = [];
 let isProcessing = false;
+
+// Funções auxiliares DOM
+const getElement = (id) => document.getElementById(id);
+const getValue = (id) => getElement(id).value;
+const clearField = (id) => (getElement(id).value = "");
+
+// Funções auxiliares de validação
+const isEmpty = (value) => value === 0;
+const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+const isValidName = (value) => value.length >= 3;
+
