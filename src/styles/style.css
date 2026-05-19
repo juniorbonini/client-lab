@@ -187,3 +187,14 @@ body {
   letter-spacing: 0.8em;
   border-radius: var(--radius-pill);
 }
+
+.mainContainer {
+  display: grid;
+  grid-template-columns: 40rem 1fr;
+  gap: var(--sz-8);
+  padding: var(--sz-8) 0;
+  flex: 1;
+  align-items: center;
+}
+
+
