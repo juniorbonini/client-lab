@@ -169,6 +169,7 @@ const renderClients = (clients) => {
   });
 };
 
+//Listar clientes ao carregar a página
 function listClients() {
   showState("loading");
 
@@ -181,6 +182,7 @@ function listClients() {
     .catch(() => showErrorMessage("Não foi possível carregar clientes"));
 }
 
+// Criar cliente a partir do formulário
 function createClient() {
   if (!validateForm()) return;
 
@@ -212,6 +214,7 @@ function createClient() {
       .finally(() => setSubmitState(false));
   });
 
+  // Gerenciar estado do botão de submit
   const setSubmitState = (isSubmiting) => {
     const btn = getElement("submitBtn");
     btn.disabled = isSubmiting;
@@ -221,6 +224,7 @@ function createClient() {
   };
 }
 
+// Remover cliente
 const deleteClient = (id) => {
   enqueue(() => {
     fetch(`${API_URL}/${id}`, { method: "DELETE" })
@@ -232,3 +236,29 @@ const deleteClient = (id) => {
       .catch(() => showErrorMessage("Não foi possível remover o cliente"));
   });
 };
+
+//validar campo(Name) com debounce para não validar a cada tecla digitada
+const debounceValidateName = debounce(() => {
+  const value = getValue("inputName");
+  if (isEmpty(value))
+    return setFieldState("inputName", "feedbackName", null, "");
+  setFieldState(
+    "inputName",
+    "feedbackName",
+    isValidName(value),
+    isValidName(value) ? "" : "O nome deve conter ao menos 3 caracteres.",
+  );
+}, 400);
+
+//validar campo(E-mail) com debounce para não validar a cada tecla digitada
+const deboundeValidateEmail = debounce(() => {
+  const value = getValue("inputEmail");
+  if (isEmpty(value))
+    return setFieldState("inputEmail", "feedbackEmail", null, "");
+  setFieldState(
+    "inputEmail",
+    "feedbackEmail",
+    isValidEmail(value),
+    isValidEmail(value) ? "" : "E-mail inválido",
+  );
+});
