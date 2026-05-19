@@ -197,4 +197,58 @@ body {
   align-items: center;
 }
 
+.formSection .listSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sz-6);
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sz-3);
+}
+
+.listSection .sectionHeader {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sectionTitle {
+  font-size: var(--fz-2xl);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-tight);
+}
+
+.sectionTitle em {
+  font-style: italic;
+  color: var(--clr-purple);
+}
+
+.sectionSubTitle {
+  font-family: var(--font-mono);
+  font-size: var(--sz-sm);
+  color: var(--clr-txt-secondary);
+}
+
+.formContainer {
+  background-color: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--sz-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sz-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.formContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--clr-purple-glow2) transparent 60%);
+  pointer-events: none;
+}
 
