@@ -6,6 +6,7 @@ let isProcessing = false;
 
 // Funções auxiliares DOM
 const getElement = (id) => document.getElementById(id);
+const createElement = (tag) => document.createElement(tag);
 const getValue = (id) => getElement(id).value;
 const clearField = (id) => (getElement(id).value = "");
 
@@ -125,4 +126,48 @@ const showErrorMessage = (message) => {
 const updateBadge = (total) => {
   const label = (total = 1 ? "cliente" : "clientes");
   getElement("badgeCount").textContent = `${total} ${label}`;
+};
+
+//Renderizar lista de clientes
+const renderClients = (clients) => {
+  const list = getElement("list");
+  list.innerHTML = "";
+
+  if (clients.length === 0) {
+    showState("empty");
+    updateBadge(0);
+    return;
+  }
+
+  clients.forEach((client) => {
+    const item = createElement("li");
+    const info = createElement("div");
+    const name = createElement("span");
+    const email = createElement("span");
+    const deleteBtn = createElement("button");
+
+    item.className = "listItem";
+    info.className = "listItemInfo";
+    name.className = "listItemName";
+    email.className = "listItemEmail";
+    deleteBtn.className = "itemDelete";
+
+    name.textCotnent = client.name;
+    email.textContent = client.email;
+    deleteBtn.textContent = "Excluir";
+
+    deleteBtn.addEventListener(
+      "click",
+      () => {} /*função deleteClient(id client) */,
+    );
+
+    item.appendChild(info);
+    info.appendChild(name);
+    info.appendChild(email);
+    item.appendChild(deleteBtn);
+    list.appendChild(item);
+
+    showState("list");
+    updateBadge * clients.length;
+  });
 };
