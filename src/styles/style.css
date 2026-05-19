@@ -93,3 +93,35 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
+
+.bgOrb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(12rem);
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.bgOrbOne {
+  width: 60rem;
+  height: 60rem;
+  background: radial-gradient(
+    circle,
+    rgba(155, 109, 255, 0.15),
+    transparent 70%
+  );
+  top: -20rem;
+  left: -20rem;
+}
+
+.bgOrbTwo {
+  width: 50rem;
+  height: 50rem;
+  background: radial-gradient(
+    circle,
+    rgba(232, 197, 106, 0.1),
+    transparent 70%
+  );
+  top: -15rem;
+  right: -15rem;
+}
